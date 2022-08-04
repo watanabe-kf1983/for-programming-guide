@@ -16,6 +16,21 @@
         <li><a href="flatter/{{.}}">{{.}}をおだてる</a></li>
         {{/namelist}}
     </ul>
+
+    <hr>
+
+    <form method="GET" action="/flatter-by-query">
+        おだてる人：
+        <input type="text" name="name"> さん
+        <button type="submit">クエリパラメータで送信</button>
+    </form>
+
+    <form method="POST" action="/flatter-by-post">
+        おだてる人： 
+        <input type="text" name="name"> さん
+        <button type="submit">リクエストボディで送信</button>
+    </form>
+
 </body>
 
 </html>

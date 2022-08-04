@@ -15,4 +15,14 @@ router.get('/flatter/:name', function (req, res, next) {
     res.render('flatter_view.html', data);
 });
 
+router.get('/flatter-by-query', function (req, res, next) {
+    const data = flatter(req.query.name);
+    res.render('flatter_view.html', data);
+});
+
+router.post('/flatter-by-post', function (req, res, next) {
+    const data = flatter(req.body.name);
+    res.render('flatter_view.html', data);
+});
+
 module.exports = router;
