@@ -26,8 +26,11 @@
     </form>
 
     <form method="POST" action="/flatter-by-post">
-        おだてる人： 
-        <input type="text" name="name"> さん
+        おだてる人：
+        {{#namelist}}
+        <input type="radio" name="name" value="{{.}}" id="{{.}}">
+        <label for="{{.}}"> {{.}} さん </label>
+        {{/namelist}}
         <button type="submit">リクエストボディで送信</button>
     </form>
 
