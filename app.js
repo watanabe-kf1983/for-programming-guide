@@ -1,6 +1,7 @@
 const express = require('express');
 const mustacheExpress = require('mustache-express');
 const logger = require('morgan');
+const session = require('express-session')
 
 const router = require('./controllers/router');
 
@@ -11,6 +12,11 @@ app.engine('html', mustacheExpress());
 app.set('views', __dirname + '/views');
 
 app.use(logger('dev'));
+app.use(session({
+    secret: 'a random set of characters like 1aq2ws3de4',
+    resave: false,
+    saveUninitialized: true
+}))
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(__dirname + '/static'));
