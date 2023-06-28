@@ -1,12 +1,18 @@
-const express = require('express');
-const router = express.Router();
+const expressPromiseRouter = require('express-promise-router');
+const router = expressPromiseRouter();
 const flatter = require('../models/flatter');
 const namelist = require('../models/namelist');
+const family = require('../models/family');
 
 router.get('/', function (req, res, next) {
     const data = namelist();
     data.history = req.session.history
     res.render('list_view.html', data);
+});
+
+router.get('/family', async function (req, res, next) {
+    const data = await family();
+    res.render('family.html', { "family": data });
 });
 
 router.get('/flatter/:name', function (req, res, next) {
