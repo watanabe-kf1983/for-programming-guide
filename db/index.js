@@ -11,4 +11,9 @@ async function query(text, params) {
     return await pool.query(text, params)
 }
 
-module.exports = { query: query };
+async function getClient() {
+    return await pool.connect();
+}
+
+
+module.exports = { query: query, getClient: getClient };
