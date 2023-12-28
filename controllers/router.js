@@ -3,12 +3,26 @@ const router = expressPromiseRouter();
 const flatter = require('../models/flatter');
 const namelist = require('../models/namelist');
 const family = require('../models/family');
+const auth = require('../auth/auth');
 
 router.get('/', function (req, res, next) {
     const data = namelist();
     data.history = req.session.history
+    data.username = req.user
     res.render('list_view.html', data);
 });
+
+router.get('/sign-in', function (req, res, next) {
+    res.render('sign_in.html');
+});
+
+router.post('/sign-in/enter', auth.sign_in({
+    successRedirect: "/", failureRedirect: "/sign-in"
+}));
+
+router.post('/sign-out', auth.sign_out({
+    successRedirect: "/"
+}));
 
 router.get('/family', async function (req, res, next) {
     const data = await family.list();

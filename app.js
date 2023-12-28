@@ -4,6 +4,7 @@ const logger = require('morgan');
 const session = require('express-session')
 
 const router = require('./controllers/router');
+const auth = require('./auth/auth');
 
 const app = express();
 
@@ -20,6 +21,7 @@ app.use(session({
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(__dirname + '/static'));
+app.use(auth.session_authenticate);
 
 app.use('/', router);
 

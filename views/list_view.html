@@ -11,6 +11,17 @@
 
 <body>
     <h1> Hello flatter-web !!! </h1>
+
+    {{^username}}
+        <a href="/sign-in">サインイン</a>
+    {{/username}}
+    {{#username}}
+        ようこそ{{username}}さん
+        <form action="sign-out" method="post">
+            <button type="submit">サインアウト</button>
+        </form>
+    {{/username}}
+
     <ul>
         {{#namelist}}
         <li><a href="flatter/{{.}}">{{.}}をおだてる</a></li>
