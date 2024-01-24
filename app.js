@@ -2,6 +2,7 @@ const express = require('express');
 const mustacheExpress = require('mustache-express');
 const logger = require('morgan');
 const session = require('express-session')
+const createError = require('http-errors');
 
 const router = require('./controllers/router');
 const auth = require('./auth/auth');
@@ -22,6 +23,15 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(__dirname + '/static'));
 app.use(auth.session_authenticate);
+
+app.use('/family', (req, res, next) => {
+    if (req.user) {
+        next();
+    } else {
+        next(createError(401, 'サインインしないと利用できません'));
+    }
+});
+
 
 app.use('/', router);
 
