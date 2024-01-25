@@ -29,12 +29,12 @@ router.get('/family', async function (req, res, next) {
     res.render('family.html', { "family": data });
 });
 
-router.post('/add-family', async function (req, res, next) {
+router.post('/family/add', async function (req, res, next) {
     const data = await family.add(req.body.name, req.body.age);
     res.render('family_result.html', { "message": data });
 });
 
-router.post('/remove-family', async function (req, res, next) {
+router.post('/family/remove', async function (req, res, next) {
     const data = await family.remove(req.body.name, req.body.age);
     res.render('family_result.html', { "message": data });
 });

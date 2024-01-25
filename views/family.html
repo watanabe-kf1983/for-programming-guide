@@ -21,7 +21,7 @@
             <td>{{full_name}}</td>
             <td class="number">{{age}}</td>
             <td>
-                <form method="POST" action="/remove-family">
+                <form method="POST" action="/family/remove">
                    <input type="hidden" name="name" value="{{full_name}}">
                    <input type="hidden" name="age" value="{{age}}">
                    <button type="submit">削除</button>
@@ -32,7 +32,7 @@
     </table>
 
     <hr>
-    <form method="POST" action="/add-family">
+    <form method="POST" action="/family/add">
         なまえ： <input type="text" name="name" size="6"> さん
         <br>
         年齢： <input type="text" name="age" size="3"> 才
