@@ -1,10 +1,15 @@
 const db = require('../db');
 
+async function isMember(name) {
+    result = await db.query('SELECT COUNT(full_name) FROM isono_family WHERE full_name=$1', [name]);
+    console.log(result);
+    return result.rows[0].count > 0;
+}
+
 async function list() {
     result = await db.query('SELECT full_name, age FROM isono_family');
     return result.rows;
 }
-
 
 async function remove(name, age) {
 
@@ -67,6 +72,7 @@ async function add(name, age) {
 
 
 module.exports = {
+    isMember: isMember,
     list: list,
     add: add,
     remove: remove

@@ -6,6 +6,7 @@ const createError = require('http-errors');
 
 const router = require('./controllers/router');
 const auth = require('./auth/auth');
+const family = require('./models/family');
 
 const app = express();
 
@@ -32,6 +33,19 @@ app.use('/family', (req, res, next) => {
     }
 });
 
+app.use('/family', async (req, res, next) => {
+    try {
+        const isMember = await family.isMember(req.user);
+        if (isMember) {
+            next();
+        } else {
+            next(createError(403,
+                '家族のみが、利用できます。あなたは利用できません'));
+        }
+    } catch (error) {
+        next(error);
+    }
+});
 
 app.use('/', router);
 
