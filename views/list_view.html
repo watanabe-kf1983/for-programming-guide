@@ -45,13 +45,18 @@
     <br>
     あなたが いままでに おだてた人たち
     <ul>
-        {{#history}}
+        {{#history.flatterees}}
         <li>{{.}}さん</li>
-        {{/history}}
+        {{/history.flatterees}}
     </ul>
-
-    <a href="session-destroy">リセット</a>
-
+    <hr>
+    <br>
+    あなたを いままでに おだてた人たち
+    <ul>
+        {{#history.flatterers}}
+        <li>{{.}}さん</li>
+        {{/history.flatterers}}
+    </ul>
     <hr>
 
     <a href="/family">磯野家の人々</a>
