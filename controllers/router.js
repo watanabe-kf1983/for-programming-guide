@@ -15,7 +15,6 @@ router.get('/', function (req, res, next) {
 router.get('/sign-in', function (req, res, next) {
     res.render('sign_in.html');
 });
-
 router.post('/sign-in/enter', auth.sign_in({
     successRedirect: "/", failureRedirect: "/sign-in"
 }));
@@ -23,6 +22,15 @@ router.post('/sign-in/enter', auth.sign_in({
 router.post('/sign-out', auth.sign_out({
     successRedirect: "/"
 }));
+
+// LINEでログイン
+router.get('/sign-in/line', auth.sign_in_line())
+
+// LINEでログイン（コールバック）
+router.get('/sign-in/line/cb', auth.sign_in_line_cb({
+    successRedirect: "/", failureRedirect: "/sign-in"
+}));
+
 
 router.get('/family', async function (req, res, next) {
     const data = await family.list();
